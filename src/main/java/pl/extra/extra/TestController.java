@@ -1,5 +1,6 @@
 package pl.extra.extra;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-    @Autowired
-    SlackResponseRepo repo;
+//    @Autowired
+//    SlackResponseRepo repo;
+    List<SlackResponseDto> responseDtos = new ArrayList<>();
 
     @RequestMapping("/")
     public String hello() {
@@ -27,12 +29,12 @@ public class TestController {
         SlackResponseDto slackResponseDto = new SlackResponseDto();
         slackResponse.setText(slackRequest.getText());
         slackResponseDto.setText(slackRequest.getText());
-        repo.save(slackResponseDto);
+        responseDtos.add(slackResponseDto);
         return slackResponse;
     }
 
     @GetMapping("/request")
     public List<SlackResponseDto> getRequests() {
-        return repo.findAll();
+        return responseDtos;
     }
 }
