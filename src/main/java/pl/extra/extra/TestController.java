@@ -16,7 +16,8 @@ public class TestController {
 
     @PostMapping("/sayHello")
     public SlackResponse sayHelloToSlack(@ModelAttribute SlackRequest slackRequest) {
-        slackRequest.getText();
-        return new SlackResponse();
+        SlackResponse slackResponse = new SlackResponse();
+        slackResponse.setText(slackRequest.getText());
+        return slackResponse;
     }
 }
