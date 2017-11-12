@@ -1,7 +1,11 @@
 package pl.extra.extra;
 
+import org.springframework.data.annotation.Id;
+
 public class SlackRequest {
 
+    @Id
+    private String id;
     String token;
     String team_id;
     String team_domain;
@@ -118,5 +122,13 @@ public class SlackRequest {
 
     public void setTrigger_id(String trigger_id) {
         this.trigger_id = trigger_id;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

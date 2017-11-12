@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
 
-//    @Autowired
-//    SlackResponseRepo repo;
+    @Autowired
+    SlackRequestRepo requestRepo;
     List<SlackResponseDto> responseDtos = new ArrayList<>();
 
     @RequestMapping("/")
@@ -30,11 +30,17 @@ public class TestController {
         slackResponse.setText(slackRequest.getText());
         slackResponseDto.setText(slackRequest.getText());
         responseDtos.add(slackResponseDto);
+        requestRepo.save(slackRequest);
         return slackResponse;
     }
 
     @GetMapping("/request")
     public List<SlackResponseDto> getRequests() {
         return responseDtos;
+    }
+
+    @GetMapping("/slackRequest")
+    public List<SlackRequest> getSlackRequests() {
+        return requestRepo.findAll();
     }
 }
